@@ -15,5 +15,5 @@ public interface ReviewService {
 
 	public List<ReviewDTO> findAll();
 
-	public void deleteById(Long id);
+	public void deleteByUserIdAndId(Long userId, Long id);
 }

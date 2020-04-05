@@ -22,34 +22,34 @@ public class ReviewController{
 	@Autowired
 	private ReviewService reviewService;
 
-	@GetMapping
+	@GetMapping("/reviews")
 	@ResponseStatus(HttpStatus.OK)
 	public List<ReviewDTO> findAll() {
 		return reviewService.findAll();
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/reviews/{userId}")
 	@ResponseStatus(HttpStatus.OK)
-	public ReviewDTO getById(@PathVariable Long id) {
-		return reviewService.getById(id);
+	public ReviewDTO getById(@PathVariable Long userId) {
+		return reviewService.getById(userId);
 	}
 
-	@PostMapping
+	@PostMapping("/users/{userId}/reviews")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Long create(@RequestBody ReviewDTO reviewDTO) {
 		return reviewService.create(reviewDTO);
 	}
 
-	@PutMapping("/{id}")
+	@PutMapping("/users/{userId}/reviews/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public void update(@RequestBody ReviewDTO reviewDTO) {
 		reviewService.update(reviewDTO);
 	}
 
-	@DeleteMapping(value = "/{id}")
+	@DeleteMapping(value = "/users/{userId}/reviews/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public void delete(@PathVariable("id") Long id) {
-		reviewService.deleteById(id);
+	public void delete(@PathVariable Long userId, @PathVariable("id") Long id) {
+		reviewService.deleteByUserIdAndId(userId, id);
 	}
 	
 

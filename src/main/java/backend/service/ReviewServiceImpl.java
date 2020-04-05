@@ -24,7 +24,7 @@ public class ReviewServiceImpl implements ReviewService{
 	public Long create(ReviewDTO reviewDTO) {
 		Review review = new Review();
 		BeanUtils.copyProperties(reviewDTO, review);
-		reviewRepository.save(review);
+		review = reviewRepository.save(review);
 		return review.getId();
 	}
 
@@ -68,9 +68,13 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public void deleteById(Long id) {
-		reviewRepository.deleteById(id);
-	}
-	
-	
+	public void deleteByUserIdAndId(Long userId, Long id) {
+		Optional<Review> reviewOpt = reviewRepository.findById(id);
+		if(reviewOpt.isPresent()) {
+			Review review = reviewOpt.get();
+			if(review.getUserId() == userId) {
+				reviewRepository.deleteById(id);
+			}
+		}		
+	}	
 }
