@@ -22,25 +22,55 @@ public class ReviewController{
 	@Autowired
 	private ReviewService reviewService;
 
-	@GetMapping("/reviews")
+	/*@GetMapping("/reviews")
 	@ResponseStatus(HttpStatus.OK)
 	public List<ReviewDTO> findAll() {
 		return reviewService.findAll();
-	}
+	}*/
 
-	@GetMapping("/reviews/{userId}")
+	@GetMapping("/reviews/{productId}")
 	@ResponseStatus(HttpStatus.OK)
-	public ReviewDTO getById(@PathVariable Long userId) {
-		return reviewService.getById(userId);
+	public ReviewDTO getByProductId(@PathVariable Long productId) {
+		return reviewService.getByProductId(productId);
 	}
 
-	@PostMapping("/users/{userId}/reviews")
+	@GetMapping("/reviews/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public ReviewDTO getById(@PathVariable Long id) {
+		return reviewService.getById(id);
+	}
+
+	@GetMapping("/reviews/{customerId}")
+	@ResponseStatus(HttpStatus.OK)
+	public ReviewDTO getByCustomerId(@PathVariable Long customerId) {
+		return reviewService.getByCustomerId(customerId);
+	}
+
+	/*@PostMapping("/orders/{transactionId}/reviews")
+	@ResponseStatus(HttpStatus.CREATED)
+	public Long create(@RequestBody ReviewDTO reviewDTO) {
+		return reviewService.create(reviewDTO);
+	}*/
+
+	@PostMapping("/orders/{customerId}/{productId}/reviews")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Long create(@RequestBody ReviewDTO reviewDTO) {
 		return reviewService.create(reviewDTO);
 	}
 
-	@PutMapping("/users/{userId}/reviews/{id}")
+	@PutMapping("/orders/{customerId}/reviews/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public void update(@RequestBody ReviewDTO reviewDTO) {
+		reviewService.update(reviewDTO);
+	}
+
+	/*@PutMapping("/orders/{productId}/reviews/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public void update(@RequestBody ReviewDTO reviewDTO) {
+		reviewService.update(reviewDTO);
+	}
+
+	@PutMapping("/orders/{transactionId}/reviews/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public void update(@RequestBody ReviewDTO reviewDTO) {
 		reviewService.update(reviewDTO);
@@ -50,6 +80,12 @@ public class ReviewController{
 	@ResponseStatus(HttpStatus.OK)
 	public void delete(@PathVariable Long userId, @PathVariable("id") Long id) {
 		reviewService.deleteByUserIdAndId(userId, id);
+	}*/
+
+	@DeleteMapping(value = "/orders/{customerId}/reviews/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public void delete(@PathVariable Long customerId, @PathVariable("id") Long id) {
+		reviewService.deleteByCustomerIdAndId(customerId, id);
 	}
 	
 

@@ -11,9 +11,11 @@ public interface ReviewService {
 
 	public void update(ReviewDTO reviewDTO);
 
-	public ReviewDTO getById(Long userId);
+	public ReviewDTO getById(Long id);
+	public ReviewDTO getByProductId(Long productId);
+	public ReviewDTO getByCustomerId(Long customerId);
 
-	public List<ReviewDTO> findAll();
+	/*public List<ReviewDTO> findAll();*/
 
-	public void deleteByUserIdAndId(Long userId, Long id);
+	public void deleteByCustomerIdAndId(Long customerId, Long id);
 }

@@ -26,7 +26,9 @@ public class Review implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long userId;
+    /*private Long transactionId;*/
+    private Long productId;
+    private Long customerId;
     private Integer starRating;
     private String remarks;
     
@@ -63,5 +65,13 @@ public class Review implements Serializable{
 
     public Long getId() {
         return id;
+    }
+
+    public Long getCustomerId() {
+        return customerId;
+    }
+
+    public Long getProductId() {
+        return productId;
     }
 }
